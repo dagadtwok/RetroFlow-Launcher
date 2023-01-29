@@ -2063,140 +2063,158 @@ end
 
 
 function xCatLookup(CatNum)  -- Credit to BlackSheepBoy69 - CatNum = Showcat
-    if CatNum == 1 then      return games_table
-    elseif CatNum == 2 then  return homebrews_table
-    elseif CatNum == 3 then  return psp_table
-    elseif CatNum == 4 then  return psx_table
-    elseif CatNum == 5 then  return n64_table
-    elseif CatNum == 6 then  return snes_table
-    elseif CatNum == 7 then  return nes_table
-    elseif CatNum == 8 then  return gba_table
-    elseif CatNum == 9 then  return gbc_table
-    elseif CatNum == 10 then     return gb_table
-    elseif CatNum == 11 then     return dreamcast_table
-    elseif CatNum == 12 then     return sega_cd_table
-    elseif CatNum == 13 then     return s32x_table
-    elseif CatNum == 14 then     return md_table
-    elseif CatNum == 15 then     return sms_table
-    elseif CatNum == 16 then     return gg_table
-    elseif CatNum == 17 then     return tg16_table
-    elseif CatNum == 18 then     return tgcd_table
-    elseif CatNum == 19 then     return pce_table
-    elseif CatNum == 20 then     return pcecd_table
-    elseif CatNum == 21 then     return amiga_table
-    elseif CatNum == 22 then     return c64_table
-    elseif CatNum == 23 then     return wswan_col_table
-    elseif CatNum == 24 then     return wswan_table
-    elseif CatNum == 25 then     return msx2_table
-    elseif CatNum == 26 then     return msx1_table
-    elseif CatNum == 27 then     return zxs_table
-    elseif CatNum == 28 then     return atari_7800_table
-    elseif CatNum == 29 then     return atari_5200_table
-    elseif CatNum == 30 then     return atari_2600_table
-    elseif CatNum == 31 then     return atari_lynx_table
-    elseif CatNum == 32 then     return colecovision_table
-    elseif CatNum == 33 then     return vectrex_table
-    elseif CatNum == 34 then     return fba_table
-    elseif CatNum == 35 then     return mame_2003_plus_table
-    elseif CatNum == 36 then     return mame_2000_table
-    elseif CatNum == 37 then     return neogeo_table
-    elseif CatNum == 38 then     return ngpc_table
-    elseif CatNum == 39 then     return psm_table
-    elseif CatNum == 40 then     return fav_count
-    elseif CatNum == 41 then     return recently_played_table
-    elseif CatNum == 42 then     return search_results_table
-    else             return files_table
+    local catVals = {
+        [1] = games_table,
+        [2] = homebrews_table,
+        [3] = psp_table,
+        [4] = psx_table,
+        [5] = n64_table,
+        [6] = snes_table,
+        [7] = nes_table,
+        [8] = gba_table,
+        [9] = gbc_table,
+        [10] = gb_table,
+        [11] = dreamcast_table,
+        [12] = sega_cd_table,
+        [13] = s32x_table,
+        [14] = md_table,
+        [15] = sms_table,
+        [16] = gg_table,
+        [17] = tg16_table,
+        [18] = tgcd_table,
+        [19] = pce_table,
+        [20] = pcecd_table,
+        [21] = amiga_table,
+        [22] = c64_table,
+        [23] = wswan_col_table,
+        [24] = wswan_table,
+        [25] = msx2_table,
+        [26] = msx1_table,
+        [27] = zxs_table,
+        [28] = atari_7800_table,
+        [29] = atari_2600_table,
+        [30] = atari_5200_table,
+        [31] = atari_lynx_table,
+        [32] = colecovision_table,
+        [33] = vectrex_table,
+        [34] = fba_table,
+        [35] = mame_2003_plus_table,
+        [36] = mame_2000_table,
+        [37] = neogeo_table,
+        [38] = ngpc_table,
+        [39] = psm_table,
+        [40] = fav_count,
+        [41] = recently_played_table,
+        [42] = search_results_table,
+    }
+
+    if CatNum < #catVals and CatNum > 0 then
+        return catVals[CatNum]
+    else
+        return files_table
     end
 end
 
 
 function xAppNumTableLookup(AppTypeNum)
-    if AppTypeNum == 1 then return games_table
-    elseif AppTypeNum == 2 then  return psp_table
-    elseif AppTypeNum == 3 then  return psx_table
-    elseif AppTypeNum == 5 then  return n64_table
-    elseif AppTypeNum == 6 then  return snes_table
-    elseif AppTypeNum == 7 then  return nes_table
-    elseif AppTypeNum == 8 then  return gba_table
-    elseif AppTypeNum == 9 then  return gbc_table
-    elseif AppTypeNum == 10 then return gb_table
-    elseif AppTypeNum == 11 then return dreamcast_table
-    elseif AppTypeNum == 12 then return sega_cd_table
-    elseif AppTypeNum == 13 then return s32x_table
-    elseif AppTypeNum == 14 then return md_table
-    elseif AppTypeNum == 15 then return sms_table
-    elseif AppTypeNum == 16 then return gg_table
-    elseif AppTypeNum == 17 then return tg16_table
-    elseif AppTypeNum == 18 then return tgcd_table
-    elseif AppTypeNum == 19 then return pce_table
-    elseif AppTypeNum == 20 then return pcecd_table
-    elseif AppTypeNum == 21 then return amiga_table
-    elseif AppTypeNum == 22 then return c64_table
-    elseif AppTypeNum == 23 then return wswan_col_table
-    elseif AppTypeNum == 24 then return wswan_table
-    elseif AppTypeNum == 25 then return msx2_table
-    elseif AppTypeNum == 26 then return msx1_table
-    elseif AppTypeNum == 27 then return zxs_table
-    elseif AppTypeNum == 28 then return atari_7800_table
-    elseif AppTypeNum == 29 then return atari_5200_table
-    elseif AppTypeNum == 30 then return atari_2600_table
-    elseif AppTypeNum == 31 then return atari_lynx_table
-    elseif AppTypeNum == 32 then return colecovision_table
-    elseif AppTypeNum == 33 then return vectrex_table
-    elseif AppTypeNum == 34 then return fba_table
-    elseif AppTypeNum == 35 then return mame_2003_plus_table
-    elseif AppTypeNum == 36 then return mame_2000_table
-    elseif AppTypeNum == 37 then return neogeo_table
-    elseif AppTypeNum == 38 then return ngpc_table
-    elseif AppTypeNum == 39 then return psm_table
-    elseif AppTypeNum == 40 then return fav_count
-    elseif AppTypeNum == 41 then return recently_played_table
-    elseif AppTypeNum == 42 then return search_results_table
-    else return homebrews_table
+    local AppTypes = {
+        [1] = games_table,
+        [2] = psp_table,
+        [3] = psx_table,
+        [5] = n64_table,
+        [6] = snes_table,
+        [7] = nes_table,
+        [8] = gba_table,
+        [9] = gbc_table,
+        [10] = gb_table,
+        [11] = dreamcast_table,
+        [12] = sega_cd_table,
+        [13] = s32x_table,
+        [14] = md_table,
+        [15] = sms_table,
+        [16] = gg_table,
+        [17] = tg16_table,
+        [18] = tgcd_table,
+        [19] = pce_table,
+        [20] = pcecd_table,
+        [21] = amiga_table,
+        [22] = c64_table,
+        [23] = wswan_col_table,
+        [24] = wswan_table,
+        [25] = msx2_table,
+        [26] = msx1_table,
+        [27] = zxs_table,
+        [28] = atari_7800_table,
+        [29] = atari_5200_table,
+        [30] = atari_2600_table,
+        [31] = atari_lynx_table,
+        [32] = colecovision_table,
+        [33] = vectrex_table,
+        [34] = fba_table,
+        [35] = mame_2003_plus_table,
+        [36] = mame_2000_table,
+        [37] = neogeo_table,
+        [38] = ngpc_table,
+        [39] = psm_table,
+        [40] = fav_count,
+        [41] = recently_played_table,
+        [42] = search_results_table
+    }
+    if AppTypeNum < #AppTypes and AppTypeNum > 0 then
+        return AppTypes[AppTypeNum]
+    else
+        return homebrews_table
     end
 end
 
 function xAppDbFileLookup(AppTypeNum)
-    if AppTypeNum == 1 then return "db_games.lua"
-    elseif AppTypeNum == 2 then  return "db_psp.lua"
-    elseif AppTypeNum == 3 then  return "db_psx.lua"
-    elseif AppTypeNum == 5 then  return "db_n64.lua"
-    elseif AppTypeNum == 6 then  return "db_snes.lua"
-    elseif AppTypeNum == 7 then  return "db_nes.lua"
-    elseif AppTypeNum == 8 then  return "db_gba.lua"
-    elseif AppTypeNum == 9 then  return "db_gbc.lua"
-    elseif AppTypeNum == 10 then return "db_gb.lua"
-    elseif AppTypeNum == 11 then return "db_dreamcast.lua"
-    elseif AppTypeNum == 12 then return "db_sega_cd.lua"
-    elseif AppTypeNum == 13 then return "db_32x.lua"
-    elseif AppTypeNum == 14 then return "db_md.lua"
-    elseif AppTypeNum == 15 then return "db_sms.lua"
-    elseif AppTypeNum == 16 then return "db_gg.lua"
-    elseif AppTypeNum == 17 then return "db_tg16.lua"
-    elseif AppTypeNum == 18 then return "db_tgcd.lua"
-    elseif AppTypeNum == 19 then return "db_pce.lua"
-    elseif AppTypeNum == 20 then return "db_pcecd.lua"
-    elseif AppTypeNum == 21 then return "db_amiga.lua"
-    elseif AppTypeNum == 22 then return "db_c64.lua"
-    elseif AppTypeNum == 23 then return "db_wswan_col.lua"
-    elseif AppTypeNum == 24 then return "db_wswan.lua"
-    elseif AppTypeNum == 25 then return "db_msx2.lua"
-    elseif AppTypeNum == 26 then return "db_msx1.lua"
-    elseif AppTypeNum == 27 then return "db_zxs.lua"
-    elseif AppTypeNum == 28 then return "db_atari_7800.lua"
-    elseif AppTypeNum == 29 then return "db_atari_5200.lua"
-    elseif AppTypeNum == 30 then return "db_atari_2600.lua"
-    elseif AppTypeNum == 31 then return "db_atari_lynx.lua"
-    elseif AppTypeNum == 32 then return "db_colecovision.lua"
-    elseif AppTypeNum == 33 then return "db_vectrex.lua"
-    elseif AppTypeNum == 34 then return "db_fba.lua"
-    elseif AppTypeNum == 35 then return "db_mame_2003_plus.lua"
-    elseif AppTypeNum == 36 then return "db_mame_2000.lua"
-    elseif AppTypeNum == 37 then return "db_neogeo.lua"
-    elseif AppTypeNum == 38 then return "db_ngpc.lua"
-    elseif AppTypeNum == 39 then return "db_psm.lua"
-    else return "db_homebrews.lua"
+    local AppTypes = {
+        [1] = "db_games.lua",
+        [2] = "db_psp.lua",
+        [3] = "db_psx.lua",
+        [5] = "db_n64.lua",
+        [6] = "db_snes.lua",
+        [7] = "db_nes.lua",
+        [8] = "db_gba.lua",
+        [9] = "db_gbc.lua",
+        [10] = "db_gb.lua",
+        [11] = "db_dreamcast.lua",
+        [12] = "db_sega_cd.lua",
+        [13] = "db_32x.lua",
+        [14] = "db_md.lua",
+        [15] = "db_sms.lua",
+        [16] = "db_gg.lua",
+        [17] = "db_tg16.lua",
+        [18] = "db_tgcd.lua",
+        [19] = "db_pce.lua",
+        [20] = "db_pcecd.lua",
+        [21] = "db_amiga.lua",
+        [22] = "db_c64.lua",
+        [23] = "db_wswan_col.lua",
+        [24] = "db_wswan.lua",
+        [25] = "db_msx2.lua",
+        [26] = "db_msx1.lua",
+        [27] = "db_zxs.lua",
+        [28] = "db_atari_7800.lua",
+        [29] = "db_atari_5200.lua",
+        [30] = "db_atari_2600.lua",
+        [31] = "db_atari_lynx.lua",
+        [32] = "db_colecovision.lua",
+        [33] = "db_vectrex.lua",
+        [34] = "db_fba.lua",
+        [35] = "db_mame_2003_plus.lua",
+        [36] = "db_mame_2000.lua",
+        [37] = "db_neogeo.lua",
+        [38] = "db_ngpc.lua",
+        [39] = "db_psm.lua"
+    }
+    
+    if AppTypeNum < #AppTypes and AppTypeNum > 0 then
+        return AppTypes[AppTypeNum]
+    else
+        return "db_homebrews.lua"
     end
+
 end
 
 function xAppNumTableLookup_Missing_Cover(AppTypeNum)

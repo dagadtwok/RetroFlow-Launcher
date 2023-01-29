@@ -8,7 +8,7 @@
 -- SETUP - INITIAL
 
 	-- Debug mode
-		local debug_mode = false -- set to true to view detailed scan progress 
+		local debug_mode = true -- set to true to view detailed scan progress 
 
 	-- Create Directory: Main
 
@@ -81,6 +81,10 @@
 
 		lang = langs[setLanguage]
 	    
+		if lang == nil then
+			lang = "EN.lua"
+		end
+
 	    -- Import lang file
 	    if files.exists("translations/" .. lang) then
 	        langfile = {}
