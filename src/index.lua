@@ -1125,28 +1125,35 @@ if System.doesFileExist(cur_dir .. "/config.dat") then
 else
 
     -- Get language number from Vita OS and to translation file number
-    if      System.getLanguage() == 0  then setLanguage = 9  -- Japanese
-    elseif  System.getLanguage() == 1  then setLanguage = 1  -- English (United States)
-    elseif  System.getLanguage() == 2  then setLanguage = 3  -- French
-    elseif  System.getLanguage() == 3  then setLanguage = 5  -- Spanish
-    elseif  System.getLanguage() == 4  then setLanguage = 2  -- German
-    elseif  System.getLanguage() == 5  then setLanguage = 4  -- Italian
-    elseif  System.getLanguage() == 6  then setLanguage = 12 -- Dutch
-    elseif  System.getLanguage() == 7  then setLanguage = 6  -- Portuguese
-    elseif  System.getLanguage() == 8  then setLanguage = 8  -- Russian
-    elseif  System.getLanguage() == 9  then setLanguage = 17 -- Korean
-    elseif  System.getLanguage() == 10 then setLanguage = 10 -- Chinese (Traditional)
-    elseif  System.getLanguage() == 11 then setLanguage = 18 -- Chinese (Simplified)
-    elseif  System.getLanguage() == 12 then setLanguage = 15 -- Finnish
-    elseif  System.getLanguage() == 13 then setLanguage = 7  -- Swedish
-    elseif  System.getLanguage() == 14 then setLanguage = 13 -- Danish
-    elseif  System.getLanguage() == 15 then setLanguage = 14 -- Norwegian
-    elseif  System.getLanguage() == 16 then setLanguage = 11 -- Polski
-    elseif  System.getLanguage() == 17 then setLanguage = 6  -- Portuguese (Brazil)
-    elseif  System.getLanguage() == 18 then setLanguage = 0  -- English (United Kingdom)
-    elseif  System.getLanguage() == 19 then setLanguage = 16 -- Turkish
-    elseif  System.getLanguage() == 20 then setLanguage = 5  -- Spanish (Latin America)
-    else setLanguage = 0
+    
+    local langNumbers = {
+        [0] = 9,    -- Japanese
+        [1] = 1,    -- English (United States)
+        [2] = 3,    -- French
+        [3] = 5,    -- Spanish
+        [4] = 2,    -- German
+        [5] = 4,    -- Italian
+        [6] = 12,   -- Dutch
+        [7] = 6,    -- Portuguese
+        [8] = 8,    -- Russian
+        [9] = 17,   -- Korean
+        [10] = 10,  -- Chinese (Traditional)
+        [11] = 18,  -- Chinese (Simplified)
+        [12] = 15,  -- Finnish
+        [13] = 7,   -- Swedish
+        [14] = 13,  -- Danish
+        [15] = 14,  -- Norwegian
+        [16] = 11,   -- Polish
+        [17] = 6,   -- Portuguese (Brazil)
+        [18] = 0,   -- English (United Kingdom)
+        [19] = 16,  -- Turkish
+        [20] = 5   -- Spanish (Latin America)
+    }
+
+    if System.getLanguage() < #langNumbers then 
+        setLanguage = langNumbers[System.getLanguage()]
+    else
+        setLanguage = 0
     end
 
     SaveSettings()
@@ -1155,63 +1162,61 @@ end
 -- Legacy fix - Languages got added bit by bit and were out of logical order.
     --These two lookups allow the menu to be reordered without affecting people's config files
 
-    -- Language - Lookup 'set language' and cross reference to set the choose language menu
-    function xchooseLanguageLookup(setLanguage)
-        if     setLanguage == 1     then return 1  -- English (United States)
-        elseif setLanguage == 2     then return 2  -- German
-        elseif setLanguage == 3     then return 3  -- French
-        elseif setLanguage == 4     then return 4  -- Italian
-        elseif setLanguage == 5     then return 5  -- Spanish
-        elseif setLanguage == 6     then return 6  -- Portuguese
-        elseif setLanguage == 7     then return 9  -- Swedish
-        elseif setLanguage == 8     then return 15 -- Russian
-        elseif setLanguage == 9     then return 18 -- Japanese
-        elseif setLanguage == 10    then return 16 -- Chinese (Traditional)
-        elseif setLanguage == 11    then return 8  -- Polski
-        elseif setLanguage == 12    then return 7  -- Dutch
-        elseif setLanguage == 13    then return 10 -- Danish
-        elseif setLanguage == 14    then return 11 -- Norwegian
-        elseif setLanguage == 15    then return 12 -- Finnish
-        elseif setLanguage == 16    then return 13 -- Turkish
-        elseif setLanguage == 17    then return 20 -- Korean
-        elseif setLanguage == 18    then return 17 -- Chinese (Simplified)
-        elseif setLanguage == 19    then return 19 -- Japanese (Ryukyuan)
-        elseif setLanguage == 20    then return 14 -- Hungarian
-        else                             return 0  -- English (United Kingdom)
-        end
-    end
-
-
     -- Language - Lookup 'choose language menu' and cross reference to set the language number
-    function xsetLanguageLookup(chooseLanguage)
-        if     chooseLanguage == 1  then return 1  -- English (United States)
-        elseif chooseLanguage == 2  then return 2  -- German
-        elseif chooseLanguage == 3  then return 3  -- French
-        elseif chooseLanguage == 4  then return 4  -- Italian
-        elseif chooseLanguage == 5  then return 5  -- Spanish
-        elseif chooseLanguage == 6  then return 6  -- Portuguese
-        elseif chooseLanguage == 7  then return 12 -- Dutch
-        elseif chooseLanguage == 8  then return 11 -- Polski
-        elseif chooseLanguage == 9  then return 7  -- Swedish
-        elseif chooseLanguage == 10 then return 13 -- Danish
-        elseif chooseLanguage == 11 then return 14 -- Norwegian
-        elseif chooseLanguage == 12 then return 15 -- Finnish
-        elseif chooseLanguage == 13 then return 16 -- Turkish
-        elseif chooseLanguage == 14 then return 20 -- Hungarian
-        elseif chooseLanguage == 15 then return 8  -- Russian
-        elseif chooseLanguage == 16 then return 10 -- Chinese (Traditional)
-        elseif chooseLanguage == 17 then return 18 -- Chinese (Simplified)
-        elseif chooseLanguage == 18 then return 9  -- Japanese
-        elseif chooseLanguage == 19 then return 19 -- Japanese (Ryukyuan)        
-        elseif chooseLanguage == 20 then return 17 -- Korean
-        
-        else                             return 0  -- English (United Kingdom)
-        end
-    end
+    local xsetLangLookup = {
+        [1] = 1,    -- English (United States)
+        [2] = 2,    -- German
+        [3] = 3,    -- French
+        [4] = 4,    -- Italian
+        [5] = 5,    -- Spanish
+        [6] = 6,    -- Portuguese
+        [7] = 12,   -- Dutch
+        [8] = 11,   -- Polish
+        [9] = 7,    -- Swedish
+        [10] = 13,  -- Danish
+        [11] = 14,  -- Norwegian
+        [12] = 15,  -- Finnish
+        [13] = 16,  -- Turkish
+        [14] = 20,  -- Hungarian
+        [15] = 8,   -- Russian
+        [16] = 10,  -- Chinese (Traditional)
+        [17] = 18,  -- Chinese (Simplified)
+        [18] = 9,   -- Japanese
+        [19] = 19,  -- Japanese (Ryukyuan)
+        [20] = 17   -- Korean
+    }
 
--- Language - Lookup 'set language' and cross reference to set the choose language menu
+    -- Language - Lookup 'set language' and cross reference to set the choose language menu
+    local langLookup = {
+        [0] = 0,    -- English (United Kingdom)
+        [1] = 1,    -- English (United States)
+        [2] = 2,    -- German
+        [3] = 3,    -- French
+        [4] = 4,    -- Italian
+        [5] = 5,    -- Spanish
+        [6] = 6,    -- Portuguese
+        [7] = 9,    -- Swedish
+        [8] = 8,    -- Russian
+        [9] = 18,   -- Japanese
+        [10] = 16,  -- Chinese (Traditional)
+        [11] = 8,   -- Polish
+        [12] = 7,   -- Dutch
+        [13] = 10,  -- Danish
+        [14] = 11,  -- Norwegian
+        [15] = 12,  -- Finnish
+        [16] = 13,  -- Turkish
+        [17] = 20,  -- Korean
+        [18] = 17,  -- Chinese (Simplified)
+        [19] = 19,  -- Japanese (Ryukyuan)
+        [20] = 14   -- Hungarian
+    }
+
 local chooseLanguage = 0
-chooseLanguage = xchooseLanguageLookup(setLanguage)
+if setLanguage < #langLookup then
+    chooseLanguage = langLookup[setLanguage]
+else 
+    chooseLanguage = 0
+end
 
 -- Check if the get info screen needs to be wider for long translations
 local wide_getinfoscreen = false
@@ -1325,24 +1330,22 @@ end
 
 
 function SetThemeColor()
-    if themeColor == 1 then
-        themeCol = red
-    elseif themeColor == 2 then
-        themeCol = yellow
-    elseif themeColor == 3 then
-        themeCol = green
-    elseif themeColor == 4 then
-        themeCol = lightgrey
-    elseif themeColor == 5 then
-        themeCol = black
-    elseif themeColor == 6 then
-        themeCol = purple
-    elseif themeColor == 7 then
-        themeCol = darkpurple
-    elseif themeColor == 8 then
-        themeCol = orange
+    local colors = {
+        [0] = blue,
+        [1] = red,
+        [2] = yellow,
+        [3] = green,
+        [4] = lightgrey,
+        [5] = black,
+        [6] = purple,
+        [7] = darkpurple,
+        [8] = orange
+    }
+
+    if themeColor > #colors then
+        themeCol = colors[0]
     else
-        themeCol = blue -- default blue
+        themeCol = colors[themeColor]
     end
 end
 SetThemeColor()
@@ -1780,7 +1783,9 @@ end
 
 
 function ChangeLanguage(def)
-
+    if def == nil then 
+        def = 0
+    end
     setLanguage = (def)
     if #lang_lines>0 then
         for k in pairs (lang_lines) do
@@ -1789,66 +1794,93 @@ function ChangeLanguage(def)
     end
 
     lang = "EN.lua"
-    if setLanguage == 1 then
-        lang = "EN_USA.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 2 then
-        lang = "DE.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 3 then
-        lang = "FR.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 4 then
-        lang = "IT.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 5 then
-        lang = "SP.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 6 then
-        lang = "PT.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 7 then
-        lang = "SW.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 8 then
-        lang = "RU.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 9 then
-        lang = "JA.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 10 then
-        lang = "CN_T.lua"
-        ChangeFont(font_chinese_traditional)
-    elseif setLanguage == 11 then
-        lang = "PL.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 12 then
-        lang = "NL.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 13 then
-        lang = "DA.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 14 then
-        lang = "NO.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 15 then
-        lang = "FI.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 16 then
-        lang = "TR.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 17 then
-        lang = "KO.lua"
-        ChangeFont(font_korean)
-    elseif setLanguage == 18 then
-        lang = "CN_S.lua"
-        ChangeFont(font_chinese_simplified)
-    elseif setLanguage == 19 then
-        lang = "JA_ryu.lua"
-        ChangeFont(font_default)
-    elseif setLanguage == 20 then
-        lang = "HU.lua"
-        ChangeFont(font_default)
+
+    local doLangChange = {
+        [1] = function()
+                lang = "EN_USA.lua"
+                ChangeFont(font_default)
+            end,
+        [2] = function()
+                lang = "DE.lua"
+                ChangeFont(font_default)
+            end,
+        [3] = function()
+                lang = "FR.lua"
+                ChangeFont(font_default)
+            end,
+        [4] = function()
+                lang = "IT.lua"
+                ChangeFont(font_default)
+            end,
+        [5] = function()
+                lang = "SP.lua"
+                ChangeFont(font_default)
+            end,
+        [6] = function()
+                lang = "PT.lua"
+                ChangeFont(font_default)
+            end,
+        [7] = function()
+                lang = "SW.lua"
+                ChangeFont(font_default)
+            end,
+        [8] = function()
+                lang = "RU.lua"
+                ChangeFont(font_default)
+            end,
+        [9] = function()
+                lang = "JA.lua"
+                ChangeFont(font_default)
+            end,
+        [10] = function()
+                lang = "CN_T.lua"
+                ChangeFont(font_chinese_traditional)
+            end,
+        [11] = function()
+                lang = "PL.lua"
+                ChangeFont(font_default)
+            end,
+        [12] = function()
+                lang = "NL.lua"
+                ChangeFont(font_default)
+            end,
+        [13] = function()
+                lang = "DA.lua"
+                ChangeFont(font_default)
+            end,
+        [14] = function()
+                lang = "NO.lua"
+                ChangeFont(font_default)
+            end,
+        [15] = function()
+                lang = "FI.lua"
+                ChangeFont(font_default)
+            end,
+        [16] = function()
+                lang = "TR.lua"
+                ChangeFont(font_default)
+            end,
+        [17] = function()
+                lang = "KO.lua"
+                ChangeFont(font_korean)
+            end,
+        [18] = function()
+                lang = "CN_S.lua"
+                ChangeFont(font_chinese_simplified)
+            end,
+        [19] = function()
+                lang = "JA_ryu.lua"
+                ChangeFont(font_default)
+            end,
+        [20] = function()
+                lang = "HU.lua"
+                ChangeFont(font_default)
+            end,
+
+    }
+
+    if setLanguage ~= nil and setLanguage > 0 and setLanguage <= #doLangChange then
+        doLangChange[setLanguage]()
     else
         lang = "EN.lua"
         ChangeFont(font_default)
@@ -1887,7 +1919,7 @@ function ChangeLanguage(def)
 end
 
 
-ChangeLanguage(xsetLanguageLookup(chooseLanguage))
+ChangeLanguage(xsetLangLookup[chooseLanguage])
 
 
 function Swap_X_O_buttons()
@@ -11446,7 +11478,7 @@ while true do
                     else
                         chooseLanguage = 0
                     end
-                    ChangeLanguage(xsetLanguageLookup(chooseLanguage))
+                    ChangeLanguage(xsetLangLookup[chooseLanguage])
                 else
                 end
 

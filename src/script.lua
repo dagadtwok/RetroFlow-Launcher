@@ -55,50 +55,32 @@
 		
 
 		lang = "EN.lua"
-	    if setLanguage == 1 then
-        	lang = "EN_USA.lua"
-	    elseif setLanguage == 2 then
-	        lang = "DE.lua"
-	    elseif setLanguage == 3 then
-	        lang = "FR.lua"
-	    elseif setLanguage == 4 then
-	        lang = "IT.lua"
-	    elseif setLanguage == 5 then
-	        lang = "SP.lua"
-	    elseif setLanguage == 6 then
-	        lang = "PT.lua"
-	    elseif setLanguage == 7 then
-	        lang = "SW.lua"
-	    elseif setLanguage == 8 then
-	        lang = "RU.lua"
-	    elseif setLanguage == 9 then
-	        lang = "JA.lua"
-	    elseif setLanguage == 10 then
-	        lang = "CN_T.lua"
-	    elseif setLanguage == 11 then
-	        lang = "PL.lua"
-	    elseif setLanguage == 12 then
-	        lang = "NL.lua"
-	    elseif setLanguage == 13 then
-	        lang = "DA.lua"
-	    elseif setLanguage == 14 then
-	        lang = "NO.lua"
-	    elseif setLanguage == 15 then
-	        lang = "FI.lua"
-	    elseif setLanguage == 16 then
-	        lang = "TR.lua"
-	    elseif setLanguage == 17 then
-	        lang = "KO.lua"
-	    elseif setLanguage == 18 then
-	        lang = "CN_S.lua"
-	    elseif setLanguage == 19 then
-        	lang = "JA_ryu.lua"
-        elseif setLanguage == 20 then
-        	lang = "HU.lua"
-	    else
-	        lang = "EN.lua"
-	    end
 
+		local langs = {
+			[1] = "EN_USA.lua",
+			[2] = "DE.lua",
+			[3] = "FR.lua",
+			[4] = "IT.lua",
+			[5] = "SP.lua",
+			[6] = "PT.lua",
+			[7] = "SW.lua",
+			[8] = "RU.lua",
+			[9] = "JA.lua",
+			[10] = "CN_T.lua",
+			[11] = "PL.lua",
+			[12] = "NL.lua",
+			[13] = "DA.lua",
+			[14] = "NO.lua",
+			[15] = "FI.lua",
+			[16] = "TR.lua",
+			[17] = "KO.lua",
+			[18] = "CN_S.lua",
+			[19] = "JA_ryu.lua",
+			[20] = "HU.lua",
+		}
+
+		lang = langs[setLanguage]
+	    
 	    -- Import lang file
 	    if files.exists("translations/" .. lang) then
 	        langfile = {}
